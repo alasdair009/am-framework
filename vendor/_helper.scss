@@ -1,0 +1,125 @@
+$base-font-size: 62.5%;
+
+@function get-color($key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }
+  @else {
+    @error 'given $key is not available in $colors';
+  }
+}
+
+@mixin am-flex-row($justify: flex-start, $direction: row, $wrap: nowrap, $align: center) {
+  @if ($align == 'top') {
+    $align: flex-start;
+  }
+  @else if($align == 'bottom') {
+    $align: flex-end;
+  }
+  align-items: $align;
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+  margin: auto;
+  max-width: $global-width;
+  width: 100%;
+}
+
+@mixin am-flex-vertical-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+@mixin am-absolute-center($x: true, $y: true) {
+  position: absolute;
+  $translateX: 0;
+  $translateY: 0;
+  @if ($x) {
+    $translateX: -50%;
+    left: 50%;
+  }
+  @if ($y) {
+    $translateY: -50%;
+    top: 50%;
+  }
+
+  transform: translate($translateX, $translateY);
+}
+
+@mixin am-glow-hover {
+  &:hover {
+    cursor: pointer;
+    filter: brightness(1.3);
+  }
+}
+
+@mixin am-button($type: standard) {
+  @include am-glow-hover();
+
+  appearance: none;
+  @if ($type == standard) {
+    background: $button-background;
+    border: $button-border;
+    color: $button-color;
+  } @else if($type == negative) {
+    background: $button-negative-background;
+    border: $button-border;
+    color: $button-negative-color;
+  } @else {
+    background: $button-alt-background;
+    border: $button-alt-border;
+    color: $button-alt-color;
+  }
+  box-shadow: 0 0 0.4rem 0.1rem get-color(black-full);
+  font-size: 1.5rem;
+  padding: 0 $global-padding;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    box-shadow: 0 0 0.6rem 0 get-color(black-full);
+  }
+  
+  &:disabled {
+      @include am-button-disabled;
+  }
+  
+  &--size-full {
+      width: 100%;
+  }
+}
+
+@mixin am-button-disabled {
+    background: $button-disabled-background;
+    color: $button-disabled-color;
+    cursor: not-allowed;
+}
+
+@mixin am-float-clear() {
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+@mixin am-breakpoint ($breakpoint, $direction: min-width) {
+  // Retrieves the value from the key
+  $value: map-get($breakpoints, $breakpoint);
+  /*MEDIA*/
+  // If the key exists in the map
+  @if $value != null {
+    // Prints a media query based on the value
+    @media ($direction: $value) {
+      @content;
+    }
+  }
+
+    // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}

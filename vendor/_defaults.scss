@@ -1,0 +1,280 @@
+// Responsible for rendering all default styles for html elements
+$anchor-color: $anchor-color !default;
+$anchor-color-hover: $anchor-color-hover !default;
+$background-color: $body-background-color !default;
+$background-fill: $background-color $body-background-img !default;
+$background-position: $body-background-position !default;
+$background-size: $body-background-size !default;
+$font: $body-font !default;
+
+// Passes SASS vars to the coffeescript
+#AM-vars {
+  $breakPointsStr: '';
+  @each $breakpoint, $value in $breakpoints {
+    $breakPointsStr: $breakPointsStr + $breakpoint + '=' + $value + ';';
+  }
+  content: $breakPointsStr;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+  &:focus {
+      outline-color: $input-outline-focus-color;
+  }
+}
+
+abbr {
+    color: $abbr-color;
+    cursor: help;
+    position: relative;
+    text-decoration: none;
+    
+    &:after {
+	border-top: 0.05rem solid $abbr-underline-color;
+	border-bottom: 0.05rem solid $abbr-underline-color;
+	bottom: -0.05rem;
+	content: '';
+	height: 0.1rem;
+	left: 0;
+	position: absolute;
+	width: 100%;
+    }
+}
+
+head {
+  display: none;
+}
+
+body {
+  background: $background-fill;
+  background-position: $background-position;
+  background-size: $background-size;
+  font-family: $font;
+  font-size: $base-font-size;
+  position: relative;
+
+  &:before {
+    box-shadow: 0 0 23px 16px $background-color;
+    content: '';
+    height: 0.1rem;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    user-select: none;
+    top: 100vh;
+    width: 100%;
+  }
+
+  * {
+    font-size: 1rem;
+  }
+}
+
+a {
+  color: $anchor-color;
+
+  @include am-glow-hover;
+  
+  &[href^="tel:"] { //TODO: Do this properlly
+      $icon-url: '../img/icon/phone-icon.svg';
+      $icon-width: 1rem;
+      
+      display: inline-block;
+      padding-left: ($icon-width + 0.2rem);
+      position: relative;
+      
+      &:before {
+	  background: url(../img/icon/phone-icon.svg) no-repeat center;
+	  background-size: contain;
+	  content: '';
+	  height: 100%;
+	  left: 0;
+	  position: absolute;
+	  top: 0;
+	  width: $icon-width;
+      }
+  }
+}
+
+details {
+    display: block;
+    width: 100%;
+}
+
+pre {
+    background: grey;
+    display: block;
+    padding: $global-padding /2;
+    text-align: center;
+    width: 100%;
+}
+
+summary {
+    display: block;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+thead {
+    background: $table-header-background-color;
+}
+
+th, td {
+    padding: $global-padding / 4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1rem;
+  margin: $vertical-rhythm 0 ($vertical-rhythm / 2);
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+h2 {
+    font-size: 1.5rem;
+}
+h3 {
+    font-size: 1.1rem;
+}
+
+p {
+  display: block;
+  line-height: 1.3rem;
+  margin-bottom: $vertical-rhythm;
+  width: 100%;
+}
+
+ul {
+    list-style-position: inside;
+    list-style-type: circle;
+}
+
+main {
+  position: relative;
+}
+
+figcaption {
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: $vertical-rhythm;
+    text-align: right;
+}
+
+// Forms
+$fieldPadding: $global-padding / 4;
+form {
+  display: block;
+  margin-bottom: $vertical-rhythm;
+  width: 100%;
+}
+
+fieldset {
+    border: $input-border-width solid $input-border-color;
+    border-radius: $input-border-radius;
+    display: block;
+    margin: 1.5rem auto $vertical-rhythm;
+    padding: $global-padding / 2;
+    position: relative;
+    width: 100%;
+}
+
+label {
+  display: block;
+  width: 100%;
+}
+
+legend {
+  display: block;
+  left: 0;
+  position: absolute;
+  top: (-$input-border-width - 1rem);
+  width: 100%;
+}
+
+input {
+  background: $input-background-color;
+  border: $input-border-width solid $input-border-color;
+  border-radius: $input-border-radius;
+  display: block;
+  margin-bottom: $vertical-rhythm;
+  padding: $fieldPadding;
+  width: 100%;
+  
+  &:disabled {
+      background: $input-disabled-background-color;
+      color: $input-disabled-color;
+      cursor: not-allowed;
+      filter: grayscale(1);
+  }
+  
+  &[type="radio"],
+  &[type="checkbox"]{
+      @supports (appearance: none) {
+	  appearance: none;
+	  background: $input-background-color;
+	  border: $input-border-width solid $input-border-color;
+	  border-radius: 50%;
+	  
+	  &:checked {
+	      box-shadow: inset 0 0 0 0.3rem $input-radio-check-color;
+	  }
+
+	  &:disabled {
+	      background: $input-disabled-background-color;
+	  }
+      }
+      
+      height: 1rem;
+      width: 1rem;
+  }
+  
+  &[type="checkbox"] {
+      @supports (appearance: none) {
+	  border-radius: 0;
+	  
+	  &:checked {
+	      background: $input-background-color url(../img/tick.svg) no-repeat center;
+	      background-size: contain;
+	      box-shadow: none;
+	  }
+	  
+	  &:disabled {
+	      opacity: 0.5;
+	  }
+      }
+  }
+}
+
+textarea {
+  border: 0.1rem solid $input-border-color;
+  border-radius: $input-border-radius;
+  display: block;
+  height: 10rem;
+  margin-bottom: $vertical-rhythm;
+  padding: $fieldPadding;
+  resize: none;
+  width: 100%;
+  
+  &:disabled {
+      background: $input-disabled-background-color;
+      color: $input-disabled-color;
+      cursor: not-allowed;
+      filter: grayscale(1);
+  }
+}
+
+button {
+  @include am-button;
+  
+  &:disabled {
+      cursor: not-allowed;
+  }
+}

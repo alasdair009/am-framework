@@ -1,0 +1,57 @@
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-0.5rem);
+  }
+
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@mixin am-anim-bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-0.1rem, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(0.2rem, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-0.4rem, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(0.4rem, 0, 0);
+  }
+}
+
+@keyframes rotateplane {
+    0% {
+        transform: perspective(12rem) rotateX(0deg) rotateY(0deg)
+    }
+
+    50% {
+        transform: perspective(12rem) rotateX(-180.1deg) rotateY(0deg)
+    }
+
+    100% {
+        transform: perspective(12rem) rotateX(-180deg) rotateY(-179.9deg)
+    }
+}
+
+@mixin am-anim-shake {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  backface-visibility: hidden;
+  perspective: 100rem;
+  transform: translate3d(0, 0, 0);
+}

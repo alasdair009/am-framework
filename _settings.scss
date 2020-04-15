@@ -1,0 +1,105 @@
+@import "vendor/common";
+
+$global-font-open-sans: 'OpenSans';
+$global-padding: 2rem;
+$global-width: 96rem;
+$global-max-z-index: 9999;
+$base-font-size: 62.5%;
+
+$breakpoints: ( // Must be em to avoid Safari issues
+  wobile: 20rem,
+  mobile: 38rem,
+  phablet: 51rem,
+  tablet: 64rem,
+  laptop: 102.4rem
+);
+
+$colors: (
+  black-full: #000000,
+  blue-sea: #0450C7,
+  blue-vista: #3487F5,
+  green-grass: #2E9B26,
+  grey-cloud: #888888,
+  grey-faint: #ebebe4,
+  red-danger: #D00000,
+  teal-tamster: #169198,
+  white-ghost: #FFFFFF
+);
+$default-site-color: get-color(green-grass);
+
+$site-sections: (
+  work: green-grass,
+  wedding: teal-tamster,
+  trampoline: blue-sea,
+  contact: red-danger
+);
+
+//$color-warning: map-get($colors, yellow-gold);
+//$color-error: map-get($colors, pink-skin);
+//
+//$font-open-sans: "Open Sans", arial;
+//$font-arima-madurai: "Arima Madurai";
+//
+//
+$abbr-color: get-color(black-full);
+$abbr-underline-color: get-color(green-grass);
+
+$anchor-color: get-color(blue-vista);
+$anchor-color-hover: lighten($anchor-color, 30%);
+//$anchor-decoration: none;
+//
+$body-font: $global-font-open-sans, 'Arial', sans-serif;
+$body-font-color: map-get($colors, black);
+$body-background-color: get-color(black-full);
+$body-background-img: url(../img/background.png) no-repeat center;
+$body-background-size: cover;
+$body-background-position: top;
+
+$button-background: get-color(green-grass);
+$button-border: none;
+$button-color: get-color(white-ghost);
+
+$button-negative-background: get-color(red-danger);
+$button-negative-color: get-color(white-ghost);
+
+$button-disabled-background: get-color(grey-cloud);
+$button-disabled-color: get-color(black-full);
+
+$button-alt-background: transparent;
+$button-alt-border: 0.2rem solid get-color(white-ghost);
+$button-alt-color: get-color(white-ghost);
+
+//
+//$button-font: $font-arima-madurai;
+//
+//$headerStackPoint: tablet;
+//
+//$heading-font: $font-arima-madurai;
+//$heading-weight: bold;
+//$heading-margin: 0 0 $vertical-rhythm;
+//$heading-size-1: 5rem;
+//
+
+$input-background-color: get-color(white-ghost);
+$input-border-color: get-color(grey-cloud);
+$input-border-radius: 0;
+$input-border-width: 0.1rem;
+$input-check-radio-height: 3rem;
+$input-disabled-background-color: get-color(grey-faint);
+$input-disabled-color: get-color(grey-cloud);
+$input-error-text-color: get-color(red-danger);
+$input-error-input-background: lighten(get-color(red-danger), 50%);
+$input-error-input-border-color: get-color(red-danger);
+$input-error-input-color: get-color(black-full);
+$input-outline-focus-color: get-color(green-grass);
+$input-radio-check-color: get-color(black-full);
+//
+//$title-font: $font-arima-madurai;
+
+$table-header-background-color: get-color(green-grass);
+
+$vertical-rhythm: 0.8rem;
+$z-index-max: 9999;
+
+//  Custom vars
+$headerHeight: 4rem;

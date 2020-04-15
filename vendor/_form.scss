@@ -1,0 +1,39 @@
+*[data-am-form-error] {
+  color: $input-error-text-color;
+  display: none;
+}
+
+*[data-am-form-error="invalid"] {
+  display: block;
+}
+
+input,
+select,
+textarea {
+  &[data-am-focus]:invalid {
+    background: $input-error-input-background;
+    border-color: $input-error-input-border-color;
+    color: $input-error-input-color;
+  }
+}
+
+.am-form-error {
+  @include am-anim-shake;
+}
+
+.am-button-submitting {
+    cursor: notallowed;
+    position: relative;
+    
+    &:after {
+	animation: rotateplane 1.5s infinite;
+	background: $button-color;
+	content: '';
+	height: 0.5rem;
+	margin-top: -50%;
+	position: absolute;
+	right: 0.5rem;
+	top: calc(50% - 0.25rem);
+	width: 0.5rem;
+    }
+}
